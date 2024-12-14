@@ -234,6 +234,11 @@
                             </a> </li>
                     </ul>
                 </li>
+
+                <li class="nav-item"> <a href="{{ url('admin/logout') }}" class="nav-link {{ Request::is('admin/admin/list') ? 'active' : '' }}"> 
+                    <i class="nav-icon bi bi-box-arrow-in-right"></i>
+                        <p>Logout</p>
+                    </a> </li>
             </ul> <!--end::Sidebar Menu-->
         </nav>
     </div> <!--end::Sidebar Wrapper-->
