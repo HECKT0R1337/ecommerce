@@ -17,6 +17,19 @@ composer require stripe/stripe-php
 
 */
 
+/*
+
+Sweet Alert
+        composer require realrashid/sweet-alert
+        php artisan sweetalert:publish
+
+        https://sweetalert2.github.io/
+        https://realrashid.github.io/sweet-alert/
+*/
+
+
+
+
 
 
 

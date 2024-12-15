@@ -30,7 +30,6 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-                @include('admin.layouts._message')
                 <form action="{{ route('auth_login_admin') }}" method="post">
                     @csrf
                     <div class="input-group mb-3"> <input type="email" name="email" class="form-control"

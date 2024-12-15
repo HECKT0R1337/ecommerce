@@ -79,10 +79,14 @@
                         data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i> <i data-lte-icon="minimize"
                         class="bi bi-fullscreen-exit" style="display: none;"></i> </a> </li>
             <!--end::Fullscreen Toggle--> <!--begin::User Menu Dropdown-->
-            <li class="nav-item dropdown user-menu"> <a href="#" class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"> <img src="{{ asset('public/assets/img/user2-160x160.jpg') }}"
+            <li class="nav-item dropdown user-menu">
+
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <img
+                        src="{{ asset('public/assets/img/user2-160x160.jpg') }}"
                         class="user-image rounded-circle shadow" alt="User Image"> <span
                         class="d-none d-md-inline">Alexander Pierce</span> </a>
+
+
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end"> <!--begin::User Image-->
                     <li class="user-header text-bg-primary"> <img
                             src="{{ asset('public/assets/img/user2-160x160.jpg') }}" class="rounded-circle shadow"
@@ -117,14 +121,26 @@
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu"
                 data-accordion="false">
-                <li class="nav-item"> <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"> <i
+                <li class="nav-item"> <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"> <i
                             class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ url('admin/admin/list') }}" class="nav-link {{ Request::is('admin/admin/list') ? 'active' : '' }}"> 
-                    <i class="nav-icon bi bi-box-arrow-in-right"></i>
+                <li class="nav-item"> 
+                    <a href="{{ url('admin/admin/list') }}"
+                        class="nav-link {{ Request::is('admin/admin/list') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-box-arrow-in-right"></i>
                         <p>Admin</p>
-                    </a> </li>
+                    </a> 
+                </li>
+
+                <li class="nav-item"> 
+                    <a href="{{ url('admin/admin/list') }}"
+                        class="nav-link {{ Request::segment(2) == 'product' ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <p>Product</p>
+                    </a> 
+                </li>
                 <li class="nav-item"> <a href="#" class="nav-link"> <i
                             class="nav-icon bi bi-box-seam-fill"></i>
                         <p>
@@ -235,8 +251,9 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"> <a href="{{ url('admin/logout') }}" class="nav-link {{ Request::is('admin/admin/list') ? 'active' : '' }}"> 
-                    <i class="nav-icon bi bi-box-arrow-in-right"></i>
+                <li class="nav-item"> <a href="{{ url('admin/logout') }}"
+                        class="nav-link {{ Request::is('admin/logout') ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-box-arrow-in-right"></i>
                         <p>Logout</p>
                     </a> </li>
             </ul> <!--end::Sidebar Menu-->

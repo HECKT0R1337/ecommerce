@@ -4,6 +4,15 @@
     </div>
 @endif
 
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger text-center" style="width:80%;" role="alert">
+            {{ $error }}
+        </div>
+    @endforeach
+@endif
+
+
 @if (Session::has('success'))
     <div class="alert alert-success" role="alert">
         Messge: {{ Session::get('success') }}
