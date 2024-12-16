@@ -12,7 +12,7 @@
                         <div class="card-header">
                             <div class="card-title">Edit this Admin</div>
                         </div>
-                        <form action="{{route('admin.update',$admin->id)}}" method="post">
+                        <form action="{{ route('admin.update', $admin->id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="card-body">
@@ -23,25 +23,23 @@
                                     <div id="emailHelp" class="form-text">
                                         We'll never share your email with anyone else.
                                     </div>
-                                    <div class="form-text" style="color:red">{{$errors->first('email')}}
+                                    <div class="form-text" style="color:red">{{ $errors->first('email') }}</div>
                                 </div>
 
                                 <div class="mb-3"> <label for="inputname" class="form-label">name</label>
                                     <input type="text" name='name' value="{{ $admin->name }}" class="form-control"
                                         id="inputname" aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{$errors->first('name')}}
-
+                                    <div class="form-text" style="color:red">{{ $errors->first('name') }}</div>
                                 </div>
-
                                 <div class="mb-3"> <label for="InputPassword" class="form-label">Password</label>
                                     <input type="password" name='password' class="form-control" id="InputPassword">
-                                    <div class="form-text" style="color:red">{{$errors->first('password')}}
-
+                                    <div class="form-text" style="color:red">{{ $errors->first('password') }}
+                                    </div>
                                 </div>
 
-                            </div>
-                            <div class="card-footer"> <button type="submit" class="btn btn-success">Submit</button> </div>
-                        </form> 
+                                <div class="card-footer"> <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                        </form>
                     </div>
                 </div>
             </div>

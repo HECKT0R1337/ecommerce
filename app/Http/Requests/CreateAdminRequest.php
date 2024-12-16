@@ -33,13 +33,13 @@ class CreateAdminRequest extends FormRequest
         return [
             'email.required' => 'Email is required',
             'email.email' => 'Email must be a valid email address',
-            'email.unique' => 'Email already exists',
+            'email.unique' => 'This Email has already been taken',
             'password.required' => 'Password is required',
             'password.min' => 'Password must be at least 6 characters',
             'name.required' => 'Name is required',
             'name.min' => 'Name must be at least 3 characters',
             'name.max' => 'Name must be less than 255 characters',
-            'name.unique' => 'Name already exists',
+            'name.unique' => 'This Name has already been taken',
         ];
     }
 }

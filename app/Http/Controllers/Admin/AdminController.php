@@ -61,6 +61,8 @@ class AdminController extends Controller
         return view('admin.admin.edit', ['admin' => $admin]);
     }
 
+    // select * from _refobjcommon where codename128 like ''
+
     public function update(UpdateAdminRequest $request)
     {
 
