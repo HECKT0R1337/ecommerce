@@ -45,7 +45,9 @@
 
 
 
- <!-- SweetAlert for Validation Errors -->
+
+
+{{--
  @if ($errors->any())
     <script>
         @foreach ($errors->all() as $error)
@@ -61,7 +63,7 @@
     </script>
 @endif
 
-{{-- @if ($errors->any())
+ @if ($errors->any())
 <script>
     Swal.fire({
         title: 'Validation Error!',
@@ -75,9 +77,8 @@
         `,
     });
 </script>
-@endif --}}
+@endif 
 
-<!-- SweetAlert for Success Message -->
 @if (session('success'))
  <script>
      Swal.fire({
@@ -89,7 +90,6 @@
  </script>
 @endif
 
-<!-- SweetAlert for Error Message -->
 @if (session('error'))
  <script>
      Swal.fire({
@@ -100,3 +100,4 @@
      });
  </script>
 @endif
+--}}

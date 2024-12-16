@@ -145,14 +145,23 @@
                         <p>Admin</p>
                     </a>
                 </li>
+                
+                <li class="nav-item">
+                    <a href="{{ url('admin/category/list') }}"
+                        class="nav-link {{ Request::segment(2) == 'category' ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <p>Category</p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('admin/admin/list') }}"
+                    <a href="{{ url('admin/product/list') }}"
                         class="nav-link {{ Request::segment(2) == 'product' ? 'active' : '' }}">
                         <i class="nav-icon bi bi-clipboard-fill"></i>
                         <p>Product</p>
                     </a>
                 </li>
+
                 <li class="nav-item"> <a href="#" class="nav-link"> <i
                             class="nav-icon bi bi-box-seam-fill"></i>
                         <p>
