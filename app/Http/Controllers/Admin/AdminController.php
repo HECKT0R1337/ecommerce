@@ -7,21 +7,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\CreateAdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 class AdminController extends Controller
 {
 
-
     public function list()
     {
-        // Alert::info('Success Title', 'Success Message');
+        //Alert::info('Success Title', 'Success Message');
         $data = ['header_title' => 'Admins List'];
         $admins = User::where('is_admin', 1)->get();
         return view('admin.admin.list', ['admins' => $admins], $data);
     }
-
 
     public function add()
     {
@@ -47,7 +46,6 @@ class AdminController extends Controller
             // All available toast types 
             // toast_error toast_success toast_info toast_warning toast_question.
 
-
         } else {
             // Alert::error('Error title', 'Errrorrrrrrr Message');
             // alert()->error('Success Title', 'Success Messagessssssssssssssssssaa111111111');
@@ -59,13 +57,19 @@ class AdminController extends Controller
 
     public function edit($id)
     {
-        $admin=User::findOrFail($id);
-        return view('admin.admin.edit',['admin'=>$admin] );
+        $admin = User::findOrFail($id);
+        return view('admin.admin.edit', ['admin' => $admin]);
     }
 
-    public function update(Request $request)
+    public function update(UpdateAdminRequest $request)
     {
-        $hashedPassword = Hash::make($request->password);
+
+        if (!empty($request->password)) {
+            $hashedPassword = Hash::make($request->password);
+        } else {
+            $hashedPassword = $request->old_password;
+        }
+
         $data = [
             'name' => $request->name,
             'email' => $request->email,
@@ -82,10 +86,7 @@ class AdminController extends Controller
 
     public function delete($id)
     {
-        $admin=User::findOrFail($id)->delete();
+        $admin = User::findOrFail($id)->delete();
         return redirect()->back()->with('toast_success', 'Admin deleted successfully');
     }
-
-
-
 }

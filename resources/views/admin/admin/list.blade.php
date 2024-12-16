@@ -22,7 +22,7 @@
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h3 class="card-title">Simple Full Width Table</h3>
+                                <h3 class="card-title">Admin List</h3>
                                 <div class="card-tools">
                                     <ul class="pagination pagination-sm float-end">
                                         <li class="page-item"> <a class="page-link" href="#">&laquo;</a> </li>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="card-body p-0">
-                                <table class="table">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">ID</th>
@@ -61,7 +61,7 @@
                                                     <form action="{{route('admin.delete',$admin->id)}}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                        <button type="submit" class="btn btn-sm btn-danger delete-btn"
                                                         {{-- onclick="return confirm('Are you sure you want to delete this?')"     --}}
                                                         >
                                                             <i class="fas fa-trash"></i> Delete
@@ -81,6 +81,30 @@
         </div>
     </main>
 @endsection
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+$(function(){
+    $(document).on('click', '.delete-btn', function(e) {
+        e.preventDefault();
+        alert('hello');
+        var id = $(this).attr('data-id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#delete-form-'+id).submit();
+            }
+        });
+    });
+});
+</script>
 
 
 @section('script')

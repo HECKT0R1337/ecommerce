@@ -22,11 +22,10 @@ class CreateAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'email' => 'required|email|unique:users,email',
-           'password' => 'required|min:6',
-           'name' => 'required|min:3|max:255|unique:users,name',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'name' => 'required|min:3|max:255|unique:users,name',
         ];
-
     }
 
     public function messages()
@@ -44,12 +43,3 @@ class CreateAdminRequest extends FormRequest
         ];
     }
 }
-
-
-
-/*
- 'name' => $request->name,
-            'email' => $request->email,
-            'password' => $hashedPassword,
-            'is_admin' => 1
-*/

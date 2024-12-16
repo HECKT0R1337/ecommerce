@@ -1,4 +1,4 @@
-@if (Session::has('error'))
+{{-- @if (Session::has('error'))
     <div class="alert alert-danger" role="alert">
         Messge: {{ Session::get('error') }}
     </div>
@@ -41,4 +41,62 @@
     <div class="alert alert-secondary" role="alert">
         Messge: {{ Session::get('secondary') }}
     </div>
+@endif --}}
+
+
+
+ <!-- SweetAlert for Validation Errors -->
+ @if ($errors->any())
+    <script>
+        @foreach ($errors->all() as $error)
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: "{{ $error }}",
+                showConfirmButton: false,
+                timer: 3000 // Auto-hide after 3 seconds
+            });
+        @endforeach
+    </script>
+@endif
+
+{{-- @if ($errors->any())
+<script>
+    Swal.fire({
+        title: 'Validation Error!',
+        icon: 'error',
+        html: `
+            <ul style="text-align: left; color: red;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        `,
+    });
+</script>
+@endif --}}
+
+<!-- SweetAlert for Success Message -->
+@if (session('success'))
+ <script>
+     Swal.fire({
+         title: 'Success!',
+         text: "{{ session('success') }}",
+         icon: 'success',
+         confirmButtonText: 'OK'
+     });
+ </script>
+@endif
+
+<!-- SweetAlert for Error Message -->
+@if (session('error'))
+ <script>
+     Swal.fire({
+         title: 'Error!',
+         text: "{{ session('error') }}",
+         icon: 'error',
+         confirmButtonText: 'OK'
+     });
+ </script>
 @endif
