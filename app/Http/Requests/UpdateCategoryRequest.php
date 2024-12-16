@@ -21,9 +21,11 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+
+        $id = $this->route('id');
         return [
             'name' => 'required|min:3',
-            'slug' => 'required|min:2',
+            'slug' => 'required|min:2|unique:categories,slug,' . $id,
             'meta_title' => 'required|min:5',
             'meta_description' => 'required|min:5',
             'meta_keywords' => 'required|min:5',
@@ -43,8 +45,7 @@ class UpdateCategoryRequest extends FormRequest
             'meta_description.min' => 'Meta Description must be at least 5 characters',
             'meta_keywords.required' => 'Meta Keywords is required',
             'meta_keywords.min' => 'Meta Keywords must be at least 5 characters',
+            'slug.unique' => 'This Slug has already been taken',
         ];
     }
-
-
 }

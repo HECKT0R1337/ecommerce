@@ -124,7 +124,7 @@
         <a href="./index.html" class="brand-link">
             <img src="{{ asset('public/assets/img/user1-128x128.jpg') }}" alt="AdminLTE Logo"
                 class="brand-image opacity-75 shadow">
-            <span class="brand-text fw-light">{{Auth::user()->name}}</span>
+            <span class="brand-text fw-light">{{ Auth::user()->name }}</span>
         </a>
     </div>
 
@@ -145,7 +145,7 @@
                         <p>Admin</p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{ url('admin/category/list') }}"
                         class="nav-link {{ Request::segment(2) == 'category' ? 'active' : '' }}">
@@ -153,123 +153,21 @@
                         <p>Category</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('admin/sub_category/list') }}"
+                        class="nav-link {{ Request::segment(2) == 'sub_category' ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <p>SubCategory</p>
+                    </a>
+                </li>
+
 
                 <li class="nav-item">
                     <a href="{{ url('admin/product/list') }}"
                         class="nav-link {{ Request::segment(2) == 'product' ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-clipboard-fill"></i>
+                        <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>Product</p>
                     </a>
-                </li>
-
-                <li class="nav-item"> <a href="#" class="nav-link"> <i
-                            class="nav-icon bi bi-box-seam-fill"></i>
-                        <p>
-                            Widgets
-                            <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"> <a href="./widgets/small-box.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Small Box</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./widgets/info-box.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>info Box</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./widgets/cards.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Cards</p>
-                            </a> </li>
-                    </ul>
-                </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> <i
-                            class="nav-icon bi bi-clipboard-fill"></i>
-                        <p>
-                            Layout Options
-                            <span class="nav-badge badge text-bg-secondary me-3">6</span> <i
-                                class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"> <a href="./layout/unfixed-sidebar.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Default Sidebar</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./layout/fixed-sidebar.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Fixed Sidebar</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./layout/layout-custom-area.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Layout <small>+ Custom Area </small></p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./layout/sidebar-mini.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Sidebar Mini</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./layout/collapsed-sidebar.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Sidebar Mini <small>+ Collapsed</small></p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./layout/logo-switch.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Sidebar Mini <small>+ Logo Switch</small></p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./layout/layout-rtl.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Layout RTL</p>
-                            </a> </li>
-                    </ul>
-                </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-tree-fill"></i>
-                        <p>
-                            UI Elements
-                            <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"> <a href="./UI/general.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>General</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./UI/icons.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Icons</p>
-                            </a> </li>
-                        <li class="nav-item"> <a href="./UI/timeline.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Timeline</p>
-                            </a> </li>
-                    </ul>
-                </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> <i
-                            class="nav-icon bi bi-pencil-square"></i>
-                        <p>
-                            Forms
-                            <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"> <a href="./forms/general.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>General Elements</p>
-                            </a> </li>
-                    </ul>
-                </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-table"></i>
-                        <p>
-                            Tables
-                            <i class="nav-arrow bi bi-chevron-right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"> <a href="./tables/simple.html" class="nav-link"> <i
-                                    class="nav-icon bi bi-circle"></i>
-                                <p>Simple Tables</p>
-                            </a> </li>
-                    </ul>
                 </li>
 
                 <li class="nav-item"> <a href="{{ url('admin/logout') }}"

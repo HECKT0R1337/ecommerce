@@ -2,36 +2,36 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
-use App\Models\CategoryModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
-use PHPUnit\Event\TestData\DataFromDataProvider;
+use App\Http\Requests\CreateSubCategoryRequest;
+use App\Http\Requests\UpdateSubCategoryRequest;
 
-class CategoryController extends Controller
+class SubCategoryController extends Controller
 {
+    
+
     public function list()
     {
-        $data['header_title'] = 'category';
-        $catgs = CategoryModel::get();
+        $data['header_title'] = 'SubCategory';
+        $catgs = SubCategory::get();
 
-        return view('admin.category.list', ['catgs' => $catgs], $data);
+        return view('admin.subcategory.list', ['catgs' => $catgs], $data);
     }
 
     public function add()
     {
-        // dd(session()->all());
         $data['header_title'] = 'Add category';
-        return view('admin.category.add', $data);
+        return view('admin.subcategory.add', $data);
     }
 
-    public function create(CreateCategoryRequest $request)
+    public function create(CreateSubCategoryRequest $request)
     {
-        $data['header_title'] = 'Create category';
-        $category = [
+        $data['header_title'] = 'Create SubCategory';
+        $subcategory = [
             'slug' => trim($request->slug),
             'name' => trim($request->name),
             'status' => trim($request->status),
@@ -41,9 +41,9 @@ class CategoryController extends Controller
             'created_by' => auth()->user()->id
         ];
 
-        $added = CategoryModel::create($category);
+        $added = SubCategory::create($subcategory);
         if ($added) {
-            return redirect()->route('category.list')->with('success', 'New Category has been added Successfully!');
+            return redirect()->route('category.list')->with('success', 'New SubCategory has been added Successfully!');
         } else {
             return redirect()->back()->with('error', 'Something wrong has just happened!');
         }
@@ -51,19 +51,20 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $data['header_title'] = 'Add category';
-        $cat = CategoryModel::where('id', $id)->firstOrFail();
+        $data['header_title'] = 'Add SubCategory';
+        $cat = SubCategory::where('id', $id)->firstOrFail();
         // dd($cat);
-        return view('admin.category.edit', $data, ['cat' => $cat]);
+        return view('admin.subcategory.edit', $data, ['cat' => $cat]);
     }
 
-    public function update(UpdateCategoryRequest $request, $id)
+
+    public function update(UpdateSubCategoryRequest $request, $id)
     {
-        $data['header_title'] = 'Create category';
+        $data['header_title'] = 'Create SubCategory';
 
         try {
             DB::beginTransaction();
-            $category = [
+            $subcategory = [
                 'slug' => trim($request->slug),
                 'name' => trim($request->name),
                 'status' => trim($request->status),
@@ -73,17 +74,16 @@ class CategoryController extends Controller
                 'created_by' => auth()->user()->id
             ];
 
-            $updated = CategoryModel::where('id', $id)->update($category);
+            $updated = SubCategory::where('id', $id)->update($subcategory);
             if ($updated) {
                 DB::commit();
-                return redirect()->route('category.list')->with('success', 'Category has been updated Successfully!');
+                return redirect()->route('subcategory.list')->with('success', 'SubCategory has been updated Successfully!');
             } else {
                 DB::rollBack();
                 return redirect()->back()->with('error', 'No changes were made.')->withInput();
             }
         } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Category Update Error: ' . $e->getMessage());
+            Log::error('SubCategory Update Error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something unexpected happend at catch block!')->withInput();
         }
     }
@@ -91,13 +91,13 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        // $deleted = CategoryModel::where('id', $id)->delete();
-        $deleted = CategoryModel::getSingle($id)->delete();
-
+        $deleted = SubCategory::getSingleSubCategory($id)->delete();
         if ($deleted) {
-            return redirect()->back()->with('success', 'Category has been deleted Successfully!');
+            return redirect()->back()->with('success', 'SubCategory has been deleted Successfully!');
         } else {
             return redirect()->back()->with('error', 'Something wrong has just happened!');
         }
     }
+
+
 }

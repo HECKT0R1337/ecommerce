@@ -45,13 +45,12 @@
 
 
 
-
-
-{{--
- @if ($errors->any())
+@push('js')
+    
+ {{-- @if ($errors->any())
     <script>
         @foreach ($errors->all() as $error)
-            Swal.fire({
+        Swal.fire({
                 toast: true,
                 position: 'top-end',
                 icon: 'error',
@@ -61,23 +60,48 @@
             });
         @endforeach
     </script>
+@endif --}}
+
+
+@if ($errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: 'Validation Errors',
+                icon: 'error',
+                html: `
+                    <div style="text-align: left; max-height: 200px; overflow-y: auto; padding: 10px;">
+                        <ul style="list-style: none; padding-left: 0; margin: 0;">
+                            @foreach ($errors->all() as $error)
+                                <li style="
+                                    padding: 8px 10px;
+                                    margin-bottom: 5px;
+                                    background: #f8d7da;
+                                    color: #721c24;
+                                    border-left: 5px solid #dc3545;
+                                    border-radius: 4px;
+                                    font-size: 14px;
+                                ">
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                `,
+                showConfirmButton: true,
+                confirmButtonText: 'Got it',
+                confirmButtonColor: '#dc3545',
+                customClass: {
+                    popup: 'swal-popup-custom',
+                    title: 'swal-title-custom',
+                },
+                width: '500px', // Adjust width
+                padding: '1.5rem',
+            });
+        });
+    </script>
 @endif
 
- @if ($errors->any())
-<script>
-    Swal.fire({
-        title: 'Validation Error!',
-        icon: 'error',
-        html: `
-            <ul style="text-align: left; color: red;">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        `,
-    });
-</script>
-@endif 
 
 @if (session('success'))
  <script>
@@ -100,4 +124,5 @@
      });
  </script>
 @endif
---}}
+
+@endpush
