@@ -13,7 +13,7 @@ use App\Http\Requests\UpdateSubCategoryRequest;
 
 class SubCategoryController extends Controller
 {
-    
+
 
     public function list()
     {
@@ -28,9 +28,9 @@ class SubCategoryController extends Controller
     public function add()
     {
         $data['header_title'] = 'Add SubCategory';
-        $categories=CategoryModel::get();
+        $categories = CategoryModel::get();
 
-        return view('admin.subcategory.add', $data,['categories'=>$categories]);
+        return view('admin.subcategory.add', $data, ['categories' => $categories]);
     }
 
     public function create(CreateSubCategoryRequest $request)
@@ -60,8 +60,8 @@ class SubCategoryController extends Controller
     {
         $data['header_title'] = 'Add SubCategory';
         $cat = SubCategory::where('id', $id)->firstOrFail();
-        // dd($cat);
-        return view('admin.subcategory.edit', $data, ['cat' => $cat]);
+        $categories = CategoryModel::get();
+        return view('admin.subcategory.edit', $data, ['cat' => $cat, 'categories' => $categories]);
     }
 
 
@@ -71,24 +71,26 @@ class SubCategoryController extends Controller
         try {
             DB::beginTransaction();
             $subcategory = [
-                'slug' => trim($request->slug),
                 'name' => trim($request->name),
-                'status' => trim($request->status),
-                'meta_title' => trim($request->meta_title),
-                'meta_description' => trim($request->meta_description),
-                'meta_keywords' => trim($request->meta_keywords),
-                'created_by' => auth()->user()->id
+                    'category_id' => trim($request->category_id),
+                    'slug' => trim($request->slug),
+                    'meta_title' => trim($request->meta_title),
+                    'meta_description' => trim($request->meta_description),
+                    'meta_keywords' => trim($request->meta_keywords),
+                    'status' => trim($request->status),
+                    'created_by' => auth()->user()->id,
             ];
 
             $updated = SubCategory::where('id', $id)->update($subcategory);
             if ($updated) {
                 DB::commit();
-                return redirect()->route('subcategory.list')->with('success', 'SubCategory has been updated Successfully!');
+                return redirect()->route('sub_category.list')->with('success', 'SubCategory has been updated Successfully!');
             } else {
                 DB::rollBack();
                 return redirect()->back()->with('error', 'No changes were made.')->withInput();
             }
         } catch (\Exception $e) {
+            DB::rollBack();
             Log::error('SubCategory Update Error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something unexpected happend at catch block!')->withInput();
         }
@@ -104,6 +106,4 @@ class SubCategoryController extends Controller
             return redirect()->back()->with('error', 'Something wrong has just happened!');
         }
     }
-
-
 }

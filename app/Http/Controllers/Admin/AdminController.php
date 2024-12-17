@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
         //Alert::info('Success Title', 'Success Message');
         $data = ['header_title' => 'Admins List'];
-        $admins = User::where('is_admin', 1)->get();
+        $admins = User::where('is_admin', 1)->paginate(5);
         return view('admin.admin.list', ['admins' => $admins], $data);
     }
 

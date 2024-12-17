@@ -16,20 +16,32 @@
                             @csrf
                             @method('put')
                             <div class="card-body">
-                                <div class="mb-3"> <label for="inputname" class="form-label">Category name <span
+                                <div class="mb-3"> <label for="inputname" class="form-label">Sub Category name <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name='name' value="{{ $cat->name }}" class="form-control"
                                         placeholder="Category name" id="inputname" aria-describedby="nameHelp">
                                     <div class="form-text" style="color:red">{{ $errors->first('name') }}</div>
                                 </div>
-                                <div class="mb-3"> <label for="inputname" class="form-label">Category Slug<span
+
+
+                                <div class="form-group">
+                                    <label for="status">pick category</label>
+                                    <select class="form-control" id="category_id" name="category_id">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $cat->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+                                <div class="mb-3"> <label for="inputname" class="form-label">Sub Category Slug<span
                                             class="text-danger">*</span></label>
                                     <input type="text" name='slug' value="{{ $cat->slug }}" class="form-control"
                                         placeholder="slug" id="inputname" aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('slug') }}</div>
+                                    <div class="form-text" style="color:rgb(114, 85, 85)">{{ $errors->first('slug') }}</div>
                                 </div>
 
-                                <div class="mb-3"> <label for="inputname" class="form-label">meta_title<span
+                                <div class="mb-3"> <label for="inputname" class="form-label">Sub meta_title<span
                                             class="text-danger">*</span></label>
                                     <input type="text" name='meta_title' value="{{ $cat->meta_title }}"
                                         class="form-control" placeholder="meta_title" id="inputname"
@@ -53,11 +65,13 @@
                                     <div class="form-text" style="color:red">{{ $errors->first('meta_keywords') }}</div>
                                 </div>
 
+
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" id="status" name="status">
                                         <option value="1" {{ $cat->status == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ $cat->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                        <option value="0" {{ $cat->status == 0 ? 'selected' : '' }}>Inactive
+                                        </option>
                                     </select>
                                 </div>
 
