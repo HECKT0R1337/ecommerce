@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Models\SubCategory;
@@ -8,10 +9,10 @@ use App\Models\CategoryModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateSubCategoryRequest;
-use App\Http\Requests\UpdateSubCategoryRequest;
+use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
-class SubCategoryController extends Controller
+class ProductController extends Controller
 {
 
 
@@ -31,7 +32,8 @@ class SubCategoryController extends Controller
         return view('admin.subcategory.add', $data, ['categories' => $categories]);
     }
 
-    public function create(CreateSubCategoryRequest $request)
+
+    public function create(CreateProductRequest $request)
     {
         $data['header_title'] = 'Create SubCategory';
         $subcategory = [
@@ -63,7 +65,7 @@ class SubCategoryController extends Controller
     }
 
 
-    public function update(UpdateSubCategoryRequest $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $data['header_title'] = 'Create SubCategory';
         try {

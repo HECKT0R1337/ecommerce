@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SubCategoryController;
@@ -45,6 +46,17 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/sub_category/edit/{id}', [SubCategoryController::class, 'edit'])->name('sub_category.edit');
     Route::put('admin/sub_category/update/{id}', [SubCategoryController::class, 'update'])->name('sub_category.update');
     Route::delete('admin/sub_category/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub_category.delete');
+
+    Route::get('admin/product/list', [ProductController::class, 'list'])->name('product.list');
+    Route::get('admin/product/add', [ProductController::class, 'add'])->name('product.add');
+    Route::post('admin/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::get('admin/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('admin/product/delete/{id}', [ProductController::class, 'delete'])->name('sub_category.delete');
+
+
+
+    
 
 
 });
