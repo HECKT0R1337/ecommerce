@@ -31,7 +31,10 @@ class CategoryModel extends Model
         return self::findOrFail($id);
     }
 
-
+    public function subCategory()
+    {
+        return $this->hasMany(SubCategory::class, 'category_id', 'id');
+    }
 
 
 }

@@ -10,9 +10,9 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card card-primary card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add New Category</div>
+                            <div class="card-title text-primary"> <h3> Edit Sub Category</h3></div>
                         </div>
-                        <form action="{{ route('category.update', $cat->id) }}" method="post">
+                        <form action="{{ route('sub_category.update', $cat->id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="card-body">

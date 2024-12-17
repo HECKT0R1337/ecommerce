@@ -10,25 +10,37 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card card-primary card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add New Category</div>
+                            <div class="card-title">Add New Sub Category</div>
                         </div>
-                        <form action="{{ route('category.create') }}" method="post">
+                        <form action="{{ route('sub_category.create') }}" method="post">
                             @csrf
                             <div class="card-body">
-                                <div class="mb-3"> <label for="inputname" class="form-label">Category name <span
+                                <div class="mb-3"> <label for="inputname" class="form-label">Sub Category name <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name='name' value="{{ old('name') }}" class="form-control"
                                         placeholder="Category name" id="inputname" aria-describedby="nameHelp">
                                     <div class="form-text" style="color:red">{{ $errors->first('name') }}</div>
                                 </div>
-                                <div class="mb-3"> <label for="inputname" class="form-label">Category Slug<span
+
+
+                                <div class="form-group">
+                                    <label for="status">pick category</label>
+                                    <select class="form-control" id="category_id" name="category_id">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+                                <div class="mb-3"> <label for="inputname" class="form-label">Sub Category Slug<span
                                             class="text-danger">*</span></label>
                                     <input type="text" name='slug' value="{{ old('slug') }}" class="form-control"
                                         placeholder="slug" id="inputname" aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('slug') }}</div>
+                                    <div class="form-text" style="color:rgb(114, 85, 85)">{{ $errors->first('slug') }}</div>
                                 </div>
 
-                                <div class="mb-3"> <label for="inputname" class="form-label">meta_title<span
+                                <div class="mb-3"> <label for="inputname" class="form-label">Sub meta_title<span
                                             class="text-danger">*</span></label>
                                     <input type="text" name='meta_title' value="{{ old('meta_title') }}"
                                         class="form-control" placeholder="meta_title" id="inputname"
@@ -51,6 +63,7 @@
                                         aria-describedby="nameHelp">
                                     <div class="form-text" style="color:red">{{ $errors->first('meta_keywords') }}</div>
                                 </div>
+
 
                                 <div class="form-group">
                                     <label for="status">Status</label>

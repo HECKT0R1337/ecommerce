@@ -27,4 +27,17 @@ class SubCategory extends Model
     {
         return self::findOrFail($id);
     }
+
+    public function userCategory()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+
+
+    public function Category()
+    {
+        return $this->belongsTo(CategoryModel::class, 'category_id', 'id');
+    }
+
 }

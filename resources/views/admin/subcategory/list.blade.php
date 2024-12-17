@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Category List</h3>
+                        <h3 class="mb-0">Sub Category List</h3>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,7 @@
         <div class="app-content">
             <div class="container-fluid">
                 <div class='mb-2' style="text-align: right">
-                    <a href="{{ route('category.add') }}" class='btn btn-primary'>Add New Category</a>
+                    <a href="{{ route('sub_category.add') }}" class='btn btn-primary'>Add New Sub Category</a>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -38,7 +38,8 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">ID</th>
-                                            <th>Name</th>
+                                            <th>SubCategory Name</th>
+                                            <th>Category Name</th>
                                             <th>Slug</th>
                                             <th>Status</th>
                                             <th>Added by</th>
@@ -51,18 +52,19 @@
                                             <tr class="align-middle">
                                                 <td>{{ $cat->id }}</td>
                                                 <td>{{ $cat->name }}</td>
+                                                <td>{{ $cat->category->name }}</td>
                                                 <td>{{ $cat->slug }}</td>
                                                 <td>{{ $cat->status == 1 ? 'active' : 'inactive' }}</td>
                                                 <td>{{ $cat->userCategory->name }}</td>
-                                                <td>{{ date('d-m-Y',strtotime($cat->created_at)) }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($cat->created_at)) }}</td>
                                                 <td>
                                                     <!-- Edit Button -->
-                                                    <a href="{{ route('category.edit', $cat->id) }}"
+                                                    <a href="{{ route('sub_category.edit', $cat->id) }}"
                                                         class="btn btn-sm btn-primary">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
 
-                                                    <form action="{{ route('category.delete', $cat->id) }}" method="POST"
+                                                    <form action="{{ route('sub_category.delete', $cat->id) }}" method="POST"
                                                         style="display:inline;">
                                                         @csrf
                                                         @method('delete')
