@@ -56,8 +56,18 @@ Route::group(['middleware' => 'admin'], function () {
 
 
 
+    Route::get('admin/jquery', function(){
+        return view('jquery');
+    })->name('jquery');
     
-
+    Route::get('admin/js', function(){
+        return view('javascript');
+    })->name('js');
+    
+    Route::get('admin/ajax', function(){
+        return view('ajax');
+    })->name('ajax');
+    
 
 });
 
