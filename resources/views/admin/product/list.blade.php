@@ -16,7 +16,7 @@
         <div class="app-content">
             <div class="container-fluid">
                 <div class='mb-2' style="text-align: right">
-                    <a href="{{ route('category.add') }}" class='btn btn-primary'>Add New Category</a>
+                    <a href="{{ route('product.add') }}" class='btn btn-primary'>Add New Product</a>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -47,34 +47,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($catgs as $cat)
-                                            <tr class="align-middle">
-                                                <td>{{ $cat->id }}</td>
-                                                <td>{{ $cat->name }}</td>
-                                                <td>{{ $cat->slug }}</td>
-                                                <td>{{ $cat->status == 1 ? 'active' : 'inactive' }}</td>
-                                                <td>{{ $cat->userCategory->name }}</td>
-                                                <td>{{ date('d-m-Y',strtotime($cat->created_at)) }}</td>
-                                                <td>
-                                                    <!-- Edit Button -->
-                                                    <a href="{{ route('category.edit', $cat->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-edit"></i> Edit
-                                                    </a>
-
-                                                    <form action="{{ route('category.delete', $cat->id) }}" method="POST"
-                                                        style="display:inline;">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-sm btn-danger delete-btn"
-                                                            {{-- onclick="return confirm('Are you sure you want to delete this?')"     --}}>
-                                                            <i class="fas fa-trash"></i> Delete
-                                                        </button>
-                                                    </form>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
+                                       
                                     </tbody>
                                 </table>
                             </div>

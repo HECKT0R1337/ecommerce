@@ -15,7 +15,7 @@ class Product extends Model
         'slug',
         'category_id',
         'sub_category_id',
-        'brand_id',
+        'brand_id',  
         'old_price',
         'price',
         'short_description',
@@ -25,4 +25,28 @@ class Product extends Model
         'status',
         'is_delete',
     ];
+
+
+    public function productColor(){
+        return $this->hasMany(ProductColor::class);
+    }
+
+    public function color(){
+        return $this->hasMany(Color::class);
+    }
+
+    public function productSize(){
+        return $this->hasMany(ProductSize::class);
+    }
+
+    public function productImage(){
+        return $this->hasMany(ProductImage::class);
+    }
+
+
+    static function checkSlug($slug){
+        return Product::where('slug', $slug)->count();
+    }
+    
+    // return self::where('slug', $slug)->count();
 }

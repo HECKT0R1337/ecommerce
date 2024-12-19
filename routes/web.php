@@ -52,23 +52,23 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::get('admin/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
-    Route::delete('admin/product/delete/{id}', [ProductController::class, 'delete'])->name('sub_category.delete');
+    Route::delete('admin/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
 
 
-    Route::get('admin/jquery', function(){
-        return view('jquery');
-    })->name('jquery');
-    
-    Route::get('admin/js', function(){
-        return view('javascript');
-    })->name('js');
-    
-    Route::get('admin/ajax', function(){
-        return view('ajax');
-    })->name('ajax');
-    
-
+    /*
+        Route::get('admin/jquery', function(){
+            return view('jquery');
+        })->name('jquery');
+        
+        Route::get('admin/js', function(){
+            return view('javascript');
+        })->name('js');
+        
+        Route::get('admin/ajax', function(){
+            return view('ajax');
+        })->name('ajax');
+    */
 });
 
 
