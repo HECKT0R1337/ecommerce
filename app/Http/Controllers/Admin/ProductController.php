@@ -19,8 +19,8 @@ class ProductController extends Controller
     public function list()
     {
         $data['header_title'] = 'product';
-        $catgs = Product::get();
-        return view('admin.product.list', ['catgs' => $catgs], $data);
+        $getRecord = Product::getRecord();
+        return view('admin.product.list', ['getRecord' => $getRecord], $data);
     }
 
 
@@ -41,22 +41,31 @@ class ProductController extends Controller
         $data['header_title'] = 'Create product';
         $title = trim($request->title);
         $slug = Str::slug($title, '-');
-        $checkSlug = Product::checkSlug($slug);
 
-        $product = [
-            'title' => trim($title),
-            'category_id' => 1,
-            'sub_category_id' => 1,
-            'brand_id' => 1,
-            'old_price' => 1,
-            'price' => 1,
-            'slug' => $slug,
-            'created_by' => auth()->user()->id
-        ];
+        $product = new Product();
+        $product->title = trim($title);
+        $product->category_id = 1;
+        $product->sub_category_id = 1;
+        $product->brand_id = 1;
+        $product->old_price = 1;
+        $product->price = 1;
+        $product->slug = $slug;
+        $product->created_by = auth()->user()->id;
+        $product->save();
+        // dd($product->id);
+        if (Product::where('slug', $slug)->exists()) {
+            $finalSlug = $slug . '-' . $product->id;
+            $product->slug = $finalSlug;
+            $product->save();
+        }
+        return redirect()->route('product.list')->with('success', 'New product has been added Successfully!');
+    }
 
-        $added = Product::create($product);
-
-        // if (empty($checkSlug)) {
+  // if ($added) {
+        // } else {
+        //     return redirect()->back()->with('error', 'Something wrong has just happened!');
+        // }
+      // if (empty($checkSlug)) {
         //     $slug = Str::slug($title, '-');
         //     $added = Product::create($product);
         // } else {
@@ -65,18 +74,7 @@ class ProductController extends Controller
         // }
 
 
-        if (Product::where('slug', $slug)->exists()) {
-            $finalSlug = $slug . '-' . $added->id;
-            $added->slug = $finalSlug;
-            $added->save();
-        }
 
-        if ($added) {
-            return redirect()->route('product.list')->with('success', 'New product has been added Successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Something wrong has just happened!');
-        }
-    }
 
     public function edit($id)
     {
@@ -98,7 +96,7 @@ class ProductController extends Controller
         if (Product::where('slug', $slug)->where('id', '!=', $id)->exists()) {
             $finalSlug = $slug . '-' . $id;
         } else {
-            $finalSlug= $slug;
+            $finalSlug = $slug;
         }
 
         try {
@@ -112,7 +110,7 @@ class ProductController extends Controller
             $product->brand_id = 1;
             $product->old_price = 1;
             $product->price = 1;
-            $product->slug =$finalSlug;
+            $product->slug = $finalSlug;
             $product->created_by = auth()->user()->id;
             $product->save();
 

@@ -15,7 +15,7 @@ class Product extends Model
         'slug',
         'category_id',
         'sub_category_id',
-        'brand_id',  
+        'brand_id',
         'old_price',
         'price',
         'short_description',
@@ -27,31 +27,46 @@ class Product extends Model
     ];
 
 
-    public function productColor(){
+    public function productColor()
+    {
         return $this->hasMany(ProductColor::class);
     }
 
-    public function color(){
+    public function color()
+    {
         return $this->hasMany(Color::class);
     }
 
-    public function productSize(){
+    public function productSize()
+    {
         return $this->hasMany(ProductSize::class);
     }
 
-    public function productImage(){
+    public function productImage()
+    {
         return $this->hasMany(ProductImage::class);
     }
 
 
-    static function checkSlug($slug){
+    static function checkSlug($slug)
+    {
         return Product::where('slug', $slug)->count();
     }
-    
+
     // return self::where('slug', $slug)->count();
 
 
-    static function getSingleProduct($id){
-       return self::where('id',$id)->first();
+    static function getSingleProduct($id)
+    {
+        return self::where('id', $id)->firstOrFail();
+    }
+
+
+    static function getRecord()
+    {
+        return self::select('products.*', 'users.name as created_by_name')
+            ->join('users', 'users.id', '=', 'products.created_by')
+            ->orderBy('products.id', 'desc')
+            ->paginate(5);
     }
 }

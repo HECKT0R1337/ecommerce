@@ -161,14 +161,6 @@
                     </a>
                 </li>
 
-
-                <li class="nav-item">
-                    <a href="{{ url('admin/product/list') }}"
-                        class="nav-link {{ Request::segment(2) == 'product' ? 'active' : '' }}">
-                        <i class="nav-icon bi bi-box-seam-fill"></i>
-                        <p>Product</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a href="{{ url('admin/brand/list') }}"
                         class="nav-link {{ Request::segment(2) == 'brand' ? 'active' : '' }}">
@@ -182,6 +174,14 @@
                         class="nav-link {{ Request::segment(2) == 'color' ? 'active' : '' }}">
                         <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>Color</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('admin/product/list') }}"
+                        class="nav-link {{ Request::segment(2) == 'product' ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-box-seam-fill"></i>
+                        <p>Product</p>
                     </a>
                 </li>
 

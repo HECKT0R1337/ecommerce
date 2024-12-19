@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Category List</h3>
+                        <h3 class="mb-0">Product List</h3>
                     </div>
                 </div>
             </div>
@@ -22,16 +22,7 @@
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h3 class="card-title">Category List</h3>
-                                <div class="card-tools">
-                                    <ul class="pagination pagination-sm float-end">
-                                        <li class="page-item"> <a class="page-link" href="#">&laquo;</a> </li>
-                                        <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                                        <li class="page-item"> <a class="page-link" href="#">2</a> </li>
-                                        <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                                        <li class="page-item"> <a class="page-link" href="#">&raquo;</a> </li>
-                                    </ul>
-                                </div>
+                                <h3 class="card-title">Product List</h3>
                             </div>
                             <div class="card-body p-0">
                                 <table class="table table-striped">
@@ -40,23 +31,25 @@
                                             <th style="width: 10px">ID</th>
                                             <th>title</th>
                                             <th>Slug</th>
+                                            <th>Created By</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($catgs as $cat)
+                                        @foreach ($getRecord as $value)
                                             <tr class="align-middle">
-                                                <td>{{ $cat->id }}</td>
-                                                <td>{{ $cat->title }}</td>
-                                                <td>{{ $cat->slug }}</td>
+                                                <td>{{ $value->id }}</td>
+                                                <td>{{ $value->title }}</td>
+                                                <td>{{ $value->slug }}</td>
+                                                <td>{{ $value->created_by_name }}</td>
                                                 <td>
                                                     <!-- Edit Button -->
-                                                    <a href="{{ route('product.edit', $cat->id) }}"
+                                                    <a href="{{ route('product.edit', $value->id) }}"
                                                         class="btn btn-sm btn-primary">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
 
-                                                    <form action="{{ route('product.delete', $cat->id) }}" method="POST"
+                                                    <form action="{{ route('product.delete', $value->id) }}" method="POST"
                                                         style="display:inline;">
                                                         @csrf
                                                         @method('delete')
@@ -71,6 +64,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                {!! $getRecord->withQueryString()->links('pagination::bootstrap-5') !!}
+
                             </div>
                         </div>
                     </div>
