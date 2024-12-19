@@ -26,13 +26,3 @@ Sweet Alert
         https://sweetalert2.github.io/
         https://realrashid.github.io/sweet-alert/
 */
-
-
-
-
-
-
-
-
-
-

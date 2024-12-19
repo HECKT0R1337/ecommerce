@@ -16,13 +16,13 @@
         <div class="app-content">
             <div class="container-fluid">
                 <div class='mb-2' style="text-align: right">
-                    <a href="{{ route('product.add') }}" class='btn btn-primary'>Add New Product</a>
+                    <a href="{{ route('color.add') }}" class='btn btn-primary'>Add New Color</a>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h3 class="card-title">Category List</h3>
+                                <h3 class="card-title">Color List</h3>
                                 <div class="card-tools">
                                     <ul class="pagination pagination-sm float-end">
                                         <li class="page-item"> <a class="page-link" href="#">&laquo;</a> </li>
@@ -38,8 +38,9 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">ID</th>
-                                            <th>title</th>
-                                            <th>Slug</th>
+                                            <th>Color name</th>
+                                            <th>Color code</th>
+                                            <th>Added By</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -47,16 +48,17 @@
                                         @foreach ($catgs as $cat)
                                             <tr class="align-middle">
                                                 <td>{{ $cat->id }}</td>
-                                                <td>{{ $cat->title }}</td>
-                                                <td>{{ $cat->slug }}</td>
+                                                <td>{{ $cat->name }}</td>
+                                                <td>{{ $cat->code }}</td>
+                                                <td>{{ $cat->created_by }}</td>
                                                 <td>
                                                     <!-- Edit Button -->
-                                                    <a href="{{ route('product.edit', $cat->id) }}"
+                                                    <a href="{{ route('color.edit', $cat->id) }}"
                                                         class="btn btn-sm btn-primary">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
 
-                                                    <form action="{{ route('product.delete', $cat->id) }}" method="POST"
+                                                    <form action="{{ route('color.delete', $cat->id) }}" method="POST"
                                                         style="display:inline;">
                                                         @csrf
                                                         @method('delete')

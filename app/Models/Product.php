@@ -49,4 +49,9 @@ class Product extends Model
     }
     
     // return self::where('slug', $slug)->count();
+
+
+    static function getSingleProduct($id){
+       return self::where('id',$id)->first();
+    }
 }

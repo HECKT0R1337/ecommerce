@@ -12,54 +12,17 @@
                         <div class="card-header">
                             <div class="card-title">Add New Category</div>
                         </div>
-                        <form action="{{ route('category.update', $cat->id) }}" method="post">
+                        <form action="{{ route('product.update', $cat->id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="card-body">
-                                <div class="mb-3"> <label for="inputname" class="form-label">Category name <span
+                                <div class="mb-3"> <label for="inputname" class="form-label">Product Title<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" name='name' value="{{ $cat->name }}" class="form-control"
+                                    <input type="text" name='title' value="{{ $cat->title }}" class="form-control"
                                         placeholder="Category name" id="inputname" aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('name') }}</div>
-                                </div>
-                                <div class="mb-3"> <label for="inputname" class="form-label">Category Slug<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name='slug' value="{{ $cat->slug }}" class="form-control"
-                                        placeholder="slug" id="inputname" aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('slug') }}</div>
+                                    <div class="form-text" style="color:red">{{ $errors->first('title') }}</div>
                                 </div>
 
-                                <div class="mb-3"> <label for="inputname" class="form-label">meta_title<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name='meta_title' value="{{ $cat->meta_title }}"
-                                        class="form-control" placeholder="meta_title" id="inputname"
-                                        aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('meta_title') }}</div>
-                                </div>
-
-                                <div class="mb-3"> <label for="inputname" class="form-label">meta_description<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name='meta_description' value="{{ $cat->meta_description }}"
-                                        class="form-control" placeholder="meta_description" id="inputname"
-                                        aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('meta_description') }}</div>
-                                </div>
-
-                                <div class="mb-3"> <label for="inputname" class="form-label">meta_keywords<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name='meta_keywords' value="{{ $cat->meta_keywords }}"
-                                        class="form-control" placeholder="meta_keywords" id="inputname"
-                                        aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('meta_keywords') }}</div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select class="form-control" id="status" name="status">
-                                        <option value="1" {{ $cat->status == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ $cat->status == 0 ? 'selected' : '' }}>Inactive</option>
-                                    </select>
-                                </div>
 
                             </div>
                             <div class="card-footer"> <button type="submit" class="btn btn-success">Submit</button>

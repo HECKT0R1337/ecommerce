@@ -169,15 +169,21 @@
                         <p>Product</p>
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a href="{{ url('admin/product/list') }}"
-                        class="nav-link {{ Request::segment(2) == 'color' ? 'active' : '' }}">
+                    <a href="{{ url('admin/brand/list') }}"
+                        class="nav-link {{ Request::segment(2) == 'brand' ? 'active' : '' }}">
                         <i class="nav-icon bi bi-box-seam-fill"></i>
-                        <p>Colors</p>
+                        <p>Brand</p>
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ url('admin/color/list') }}"
+                        class="nav-link {{ Request::segment(2) == 'color' ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-box-seam-fill"></i>
+                        <p>Color</p>
+                    </a>
+                </li>
 
                 <li class="nav-item"> <a href="{{ url('admin/logout') }}"
                         class="nav-link {{ Request::is('admin/logout') ? 'active' : '' }}">

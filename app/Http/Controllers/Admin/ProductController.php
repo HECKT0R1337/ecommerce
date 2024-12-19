@@ -32,7 +32,8 @@ class ProductController extends Controller
         return view('admin.product.add', $data, ['products' => $products]);
     }
 
-    static function checkSlug($slug){
+    static function checkSlug($slug)
+    {
         return Product::where('slug', $slug)->count();
     }
     public function create(Request $request)
@@ -54,7 +55,7 @@ class ProductController extends Controller
         ];
 
         $added = Product::create($product);
-        
+
         // if (empty($checkSlug)) {
         //     $slug = Str::slug($title, '-');
         //     $added = Product::create($product);
@@ -86,30 +87,37 @@ class ProductController extends Controller
     }
 
 
-    public function update(UpdateProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $data['header_title'] = 'Create product';
+
+        $title = trim($request->title);
+        $slug = Str::slug($title, '-');
+
+
+        if (Product::where('slug', $slug)->where('id', '!=', $id)->exists()) {
+            $finalSlug = $slug . '-' . $id;
+        } else {
+            $finalSlug= $slug;
+        }
+
         try {
             DB::beginTransaction();
-            $product = [
-                'name' => trim($request->name),
-                'category_id' => trim($request->category_id),
-                'slug' => trim($request->slug),
-                'meta_title' => trim($request->meta_title),
-                'meta_description' => trim($request->meta_description),
-                'meta_keywords' => trim($request->meta_keywords),
-                'status' => trim($request->status),
-                'created_by' => auth()->user()->id,
-            ];
 
-            $updated = Product::where('id', $id)->update($product);
-            if ($updated) {
-                DB::commit();
-                return redirect()->route('product.list')->with('success', 'product has been updated Successfully!');
-            } else {
-                DB::rollBack();
-                return redirect()->back()->with('error', 'No changes were made.')->withInput();
-            }
+            $product = Product::where('id', $id)->first();
+
+            $product->title = $title;
+            $product->category_id = 1;
+            $product->sub_category_id = 1;
+            $product->brand_id = 1;
+            $product->old_price = 1;
+            $product->price = 1;
+            $product->slug =$finalSlug;
+            $product->created_by = auth()->user()->id;
+            $product->save();
+
+            DB::commit();
+            return redirect()->route('product.list')->with('success', 'product has been updated Successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('product Update Error: ' . $e->getMessage());
