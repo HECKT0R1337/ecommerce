@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\CategoryModel;
 
 class ProductController extends Controller
 {
@@ -32,10 +33,10 @@ class ProductController extends Controller
         return view('admin.product.add', $data, ['products' => $products]);
     }
 
-    static function checkSlug($slug)
-    {
-        return Product::where('slug', $slug)->count();
-    }
+    // static function checkSlug($slug)
+    // {
+    //     return Product::where('slug', $slug)->count();
+    // }
     public function create(Request $request)
     {
         $data['header_title'] = 'Create product';
@@ -50,7 +51,7 @@ class ProductController extends Controller
         $product->old_price = 1;
         $product->price = 1;
         $product->slug = $slug;
-        $product->created_by = auth()->user()->id;
+        $product->created_by = 1;
         $product->save();
         // dd($product->id);
         if (Product::where('slug', $slug)->exists()) {
@@ -61,27 +62,19 @@ class ProductController extends Controller
         return redirect()->route('product.list')->with('success', 'New product has been added Successfully!');
     }
 
-  // if ($added) {
-        // } else {
-        //     return redirect()->back()->with('error', 'Something wrong has just happened!');
-        // }
-      // if (empty($checkSlug)) {
-        //     $slug = Str::slug($title, '-');
-        //     $added = Product::create($product);
-        // } else {
-        //     $slug = $slug . '-' . $added->id;
-        //     $added = Product::create($product);
-        // }
-
-
 
 
     public function edit($id)
     {
         $data['header_title'] = 'Add product';
-        $cat = Product::where('id', $id)->firstOrFail();
-        $products = Product::get();
-        return view('admin.product.edit', $data, ['cat' => $cat, 'products' => $products]);
+        $product = Product::where('id', $id)->firstOrFail();
+        $getCategory=CategoryModel::getSingleCategory();
+        
+        $data['product'] = $product;
+        $data['getCategory'] = $getCategory;
+
+
+        return view('admin.product.edit', $data);
     }
 
 

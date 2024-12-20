@@ -12,14 +12,14 @@
                         <div class="card-header">
                             <div class="card-title">Add New Category</div>
                         </div>
-                        <form action="{{ route('product.update', $product->id) }}" method="post">
+                        <form action="{{ route('product.update', $cat->id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3 col-md-6"> <label for="inputname" class="form-label">Product Title<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name='title' value="{{ $product->title }}"
+                                        <input type="text" name='title' value="{{ $cat->title }}"
                                             class="form-control" placeholder="Category name" id="inputname"
                                             aria-describedby="nameHelp">
                                         <div class="form-text" style="color:red">{{ $errors->first('title') }}</div>
@@ -27,7 +27,7 @@
 
                                     <div class="mb-3 col-md-6"> <label for="inputname" class="form-label">SKU<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name='sku' value="{{ $product->sku }}"
+                                        <input type="text" name='sku' value="{{ $cat->sku }}"
                                             class="form-control" placeholder="sku" id="inputname"
                                             aria-describedby="nameHelp">
                                         <div class="form-text" style="color:red">{{ $errors->first('sku') }}</div>
@@ -38,12 +38,9 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-6"> <label for="category" class="form-label">Product
                                             category<span class="text-danger">*</span></label>
-{{-- @dd($getCategory->name); --}}
-                                        <select name="category_id" class="form-control" id="">
-                                            @foreach($getCategory as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
-                                            @endforeach
 
+                                        <select name="category_id" class="form-control" id="">
+                                            <option value="">Select Category</option>
                                         </select>
 
                                     </div>
@@ -51,7 +48,7 @@
                                     <div class="mb-3 col-md-6"> <label for="sub_category"
                                             class="form-label">sub_category<span class="text-danger">*</span></label>
                                         <select name="sub_category_id" class="form-control" id="">
-                                            <option value="">Select Sub Category</option>
+                                            <option value="">Select Category</option>
                                         </select>
                                     </div>
                                 </div>
@@ -59,7 +56,7 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-6"> <label for="brand_id" class="form-label">brand_id<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name='brand_id' value="{{ $product->brand_id }}"
+                                        <input type="text" name='brand_id' value="{{ $cat->brand_id }}"
                                             class="form-control" placeholder="brand_id" id="brand"
                                             aria-describedby="nameHelp">
                                         <div class="form-text" style="color:red">{{ $errors->first('brand_id') }}</div>
@@ -144,7 +141,7 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-6"> <label for="price" class="form-label">Price<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name='price' value="{{ $product->price }}"
+                                        <input type="text" name='price' value="{{ $cat->price }}"
                                             class="form-control" placeholder="Category name" id="price"
                                             aria-describedby="price">
                                         <div class="form-text" style="color:red">{{ $errors->first('title') }}</div>
@@ -152,7 +149,7 @@
 
                                     <div class="mb-3 col-md-6"> <label for="old_price" class="form-label">SKU<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name='old_price' value="{{ $product->sku }}"
+                                        <input type="text" name='old_price' value="{{ $cat->sku }}"
                                             class="form-control" placeholder="sku" id="old_price"
                                             aria-describedby="old_price">
                                         <div class="form-text" style="color:red">{{ $errors->first('old_price') }}</div>
@@ -163,8 +160,8 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-12"> <label for="short_description" class="form-label">Short
                                             description<span class="text-danger">*</span></label>
-                                        <textarea name='short_description' value="{{ $product->short_description }}" class="form-control"
-                                            placeholder="short description" id="short_description" aria-describedby="short_description">
+                                        <textarea name='short_description' value="{{ $cat->short_description }}" class="form-control"
+                                            placeholder="Category name" id="short_description" aria-describedby="short_description">
                                         </textarea>
                                         <div class="form-text" style="color:red">
                                             {{ $errors->first('short_description') }}</div>
@@ -173,7 +170,7 @@
 
                                 <div class="row">
                                     <div class="mb-3 col-md-12"> <label for="description" class="form-label">Description<span class="text-danger">*</span></label>
-                                        <textarea name='description' value="{{ $product->description }}" class="form-control"
+                                        <textarea name='description' value="{{ $cat->description }}" class="form-control"
                                             placeholder="Category name" id="short_description" aria-describedby="description">
                                         </textarea>
                                         <div class="form-text" style="color:red">
@@ -183,7 +180,7 @@
 
                                 <div class="row">
                                     <div class="mb-3 col-md-12"> <label for="additional_information" class="form-label">Additional information<span class="text-danger">*</span></label>
-                                        <textarea name='additional_information' value="{{ $product->additional_information }}" class="form-control"
+                                        <textarea name='additional_information' value="{{ $cat->additional_information }}" class="form-control"
                                             placeholder="Category name" id="additional_information" aria-describedby="additional_information">
                                         </textarea>
                                         <div class="form-text" style="color:red">
@@ -193,7 +190,7 @@
 
                                 <div class="row">
                                     <div class="mb-3 col-md-12"> <label for="shipping_returns" class="form-label">Shipping returns<span class="text-danger">*</span></label>
-                                        <textarea name='shipping_returns' value="{{ $product->shipping_returns }}" class="form-control"
+                                        <textarea name='shipping_returns' value="{{ $cat->shipping_returns }}" class="form-control"
                                             placeholder="Category name" id="shipping_returns" aria-describedby="shipping_returns">
                                         </textarea>
                                         <div class="form-text" style="color:red">
@@ -206,8 +203,8 @@
                                 <div class="form-group">
                                     <label for="status">pick category</label>
                                     <select class="form-control" id="category_id" name="category_id">
-                                        <option value="1" {{$product->status==1?'selected':''}}>Enabled</option>
-                                        <option value="0" {{$product->status==0?'selected':''}}>Disabled</option>
+                                        <option value="1" {{$cat->status==1?'selected':''}}>Enabled</option>
+                                        <option value="0" {{$cat->status==0?'selected':''}}>Disabled</option>
 
                                       
                                     </select>

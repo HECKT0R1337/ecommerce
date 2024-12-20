@@ -124,7 +124,7 @@
         <a href="./index.html" class="brand-link">
             <img src="{{ asset('public/assets/img/user1-128x128.jpg') }}" alt="AdminLTE Logo"
                 class="brand-image opacity-75 shadow">
-            <span class="brand-text fw-light">{{ Auth::user()->name }}</span>
+            {{-- <span class="brand-text fw-light">{{ Auth::user()->name }}</span> --}}
         </a>
     </div>
 

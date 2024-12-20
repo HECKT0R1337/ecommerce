@@ -12,21 +12,45 @@
                         <div class="card-header">
                             <div class="card-title">Edit Brand</div>
                         </div>
-                        <form action="{{ route('color.update', $cat->id) }}" method="post">
+                        <form action="{{ route('brand.update', $cat->id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="card-body">
                                 <div class="mb-3"> <label for="inputname" class="form-label">Brand name <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" name='name' value="{{ $cat->name,old('name') }}" class="form-control"
+                                    <input type="text" name='name' value="{{ $cat->name }}" class="form-control"
                                         placeholder="Category name" id="inputname" aria-describedby="nameHelp">
                                     <div class="form-text" style="color:red">{{ $errors->first('name') }}</div>
                                 </div>
                                 <div class="mb-3"> <label for="inputname" class="form-label">Brand Slug<span
                                             class="text-danger">*</span></label>
-                                    <input type="color" name='code' value="{{ $cat->code,old('code') }}" class="form-control"
-                                        placeholder="code" id="inputname" aria-describedby="nameHelp">
-                                    <div class="form-text" style="color:red">{{ $errors->first('code') }}</div>
+                                    <input type="text" name='slug' value="{{ $cat->slug }}" class="form-control"
+                                        placeholder="slug" id="inputname" aria-describedby="nameHelp">
+                                    <div class="form-text" style="color:red">{{ $errors->first('slug') }}</div>
+                                </div>
+
+                                <div class="mb-3"> <label for="inputname" class="form-label">meta_title<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name='meta_title' value="{{ $cat->meta_title }}"
+                                        class="form-control" placeholder="meta_title" id="inputname"
+                                        aria-describedby="nameHelp">
+                                    <div class="form-text" style="color:red">{{ $errors->first('meta_title') }}</div>
+                                </div>
+
+                                <div class="mb-3"> <label for="inputname" class="form-label">meta_description<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name='meta_description' value="{{ $cat->meta_description }}"
+                                        class="form-control" placeholder="meta_description" id="inputname"
+                                        aria-describedby="nameHelp">
+                                    <div class="form-text" style="color:red">{{ $errors->first('meta_description') }}</div>
+                                </div>
+
+                                <div class="mb-3"> <label for="inputname" class="form-label">meta_keywords<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name='meta_keywords' value="{{ $cat->meta_keywords }}"
+                                        class="form-control" placeholder="meta_keywords" id="inputname"
+                                        aria-describedby="nameHelp">
+                                    <div class="form-text" style="color:red">{{ $errors->first('meta_keywords') }}</div>
                                 </div>
 
                                 <div class="form-group">

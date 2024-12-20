@@ -28,13 +28,13 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('admin/admin/list', [AdminController::class, 'list'])->name('admin.list');
     Route::get('admin/admin/add', [AdminController::class, 'add'])->name('admin.add');
+    Route::get('admin/admin/list', [AdminController::class, 'list'])->name('admin.list');
     Route::post('admin/admin/create', [AdminController::class, 'create'])->name('admin.create');
     Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
     Route::put('admin/admin/update/{id}', [AdminController::class, 'update'])->name('admin.update');
     Route::delete('admin/admin/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
-
+    
     Route::get('admin/category/list', [CategoryController::class, 'list'])->name('category.list');
     Route::get('admin/category/add', [CategoryController::class, 'add'])->name('category.add');
     Route::post('admin/category/create', [CategoryController::class, 'create'])->name('category.create');
