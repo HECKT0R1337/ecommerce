@@ -3,15 +3,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Brand;
+use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\CategoryModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\CategoryModel;
 
 class ProductController extends Controller
 {
@@ -69,10 +71,13 @@ class ProductController extends Controller
         $data['header_title'] = 'Add product';
         $product = Product::where('id', $id)->firstOrFail();
         $getCategory=CategoryModel::getSingleCategory();
+        $getBrand=Brand::get();
+        $getColor=Color::get();
         
         $data['product'] = $product;
         $data['getCategory'] = $getCategory;
-
+        $data['getBrand'] = $getBrand;
+        $data['getColor'] = $getColor;
 
         return view('admin.product.edit', $data);
     }

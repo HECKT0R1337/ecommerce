@@ -49,6 +49,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put('admin/sub_category/update/{id}', [SubCategoryController::class, 'update'])->name('sub_category.update');
     Route::delete('admin/sub_category/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub_category.delete');
 
+    Route::post('admin/get_sub_category', [SubCategoryController::class, 'get_sub_category'])->name('get_sub_category');
+
+
+    
+
+
     Route::get('admin/product/list', [ProductController::class, 'list'])->name('product.list');
     Route::get('admin/product/add', [ProductController::class, 'add'])->name('product.add');
     Route::post('admin/product/create', [ProductController::class, 'create'])->name('product.create');
@@ -91,3 +97,8 @@ Route::group(['middleware' => 'admin'], function () {
 Route::get('admin', [AuthController::class, 'login_admin'])->name('login_admin');
 Route::post('admin', [AuthController::class, 'auth_login_admin'])->name('auth_login_admin');
 Route::get('admin/logout', [AuthController::class, 'logout_admin'])->name('logout_admin');
+
+
+Route::get('test', function(){
+    return view('test');
+})->name('test');

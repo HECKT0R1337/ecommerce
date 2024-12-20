@@ -104,4 +104,39 @@ class SubCategoryController extends Controller
             return redirect()->back()->with('error', 'Something wrong has just happened!');
         }
     }
+
+
+
+    public function get_sub_category(Request $request){
+        $category_id = $request->id;
+        $subCat = SubCategory::where('category_id',$category_id)->get();
+
+        $htmlSide='';
+        // $htmlSide .='<option value="">Select</option>';
+
+        foreach($subCat as $sss){
+            // $htmlSide .='<option value="'.$sss->id.'">'.$sss->name.'</option>';
+            // ===
+            $htmlSide .= <<<HTML
+                            <option value="{$sss->id}">{$sss->name}</option>
+                            HTML;
+
+        }
+
+        $json['htmlRenderHeckt0r'] = $htmlSide;
+        return $json;
+
+
+        // ==return json_encode($json);
+        // == echo json_encode($json);
+        // == return ($json);
+        // == return $json;
+
+        // dd($data);
+        // return response()->json($data);
+    }
+
+
 }
+
+
