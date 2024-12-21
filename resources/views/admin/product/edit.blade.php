@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                     <div class="card card-primary card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add New Category</div>
+                            <div class="card-title">Edit Product</div>
                         </div>
                         <form action="{{ route('product.update', $product->id) }}" method="post">
                             @csrf
@@ -34,11 +34,12 @@
                                     </div>
                                 </div>
 
-
                                 <div class="row">
                                     <div class="mb-3 col-md-6"> <label for="category" class="form-label">Product
                                             category<span class="text-danger">*</span></label>
-                                        <select name="category_id" id="changeCategory" class="form-control" id="">
+                                        <select name="category_id" id="changeCategory" class="form-control">
+                                            <option value="">Select Category</option>
+
                                             @foreach ($getCategory as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -75,9 +76,17 @@
 
                                             <label>Colors<span class="text-danger">*</span></label>
                                         </div>
+
+
+
                                         @foreach ($getColor as $color)
                                             <div>
                                                 <label><input type="checkbox" name='color_id[]'
+                                                    @foreach ($getProductColor as $pcolor)
+                                                        @if ($color->id == $pcolor->color_id)
+                                                            checked
+                                                        @endif 
+                                                    @endforeach
                                                         value="{{ $color->id }}"> {{ $color->name }}</label>
                                             </div>
                                         @endforeach
@@ -110,7 +119,6 @@
                                                                     class="btn btn-success btn-sm addLine">Add</button>
                                                             </td>
                                                         </tr>
-
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -126,10 +134,10 @@
                                         <div class="form-text" style="color:red">{{ $errors->first('title') }}</div>
                                     </div>
 
-                                    <div class="mb-3 col-md-6"> <label for="old_price" class="form-label">SKU<span
+                                    <div class="mb-3 col-md-6"> <label for="old_price" class="form-label">old_price<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name='old_price' value="{{ $product->sku }}"
-                                            class="form-control" placeholder="sku" id="old_price"
+                                        <input type="text" name='old_price' value="{{ $product->old_price }}"
+                                            class="form-control" placeholder="old_price" id="old_price"
                                             aria-describedby="old_price">
                                         <div class="form-text" style="color:red">{{ $errors->first('old_price') }}</div>
                                     </div>
@@ -142,6 +150,7 @@
                                             description<span class="text-danger">*</span></label>
                                         <textarea id="summernote" name='short_description' value="{{ $product->short_description }}" class="form-control"
                                             placeholder="short description" id="short_description" aria-describedby="short_description">
+                                            {{ $product->short_description }}
                                         </textarea>
                                         <div class="form-text" style="color:red">
                                             {{ $errors->first('short_description') }}</div>
@@ -151,8 +160,9 @@
                                 <div class="row">
                                     <div class="mb-3 col-md-12"> <label for="description"
                                             class="form-label">Description<span class="text-danger">*</span></label>
-                                        <textarea id="summernote1" name='description' value="{{ $product->description }}" class="form-control" placeholder="Category name"
-                                            id="short_description" aria-describedby="description">
+                                        <textarea id="summernote1" name='description' value="{{ $product->description }}" class="form-control"
+                                            placeholder="description" id="short_description" aria-describedby="description">
+                                            {{ $product->description }}
                                         </textarea>
                                         <div class="form-text" style="color:red">
                                             {{ $errors->first('description') }}</div>
@@ -163,8 +173,10 @@
                                     <div class="mb-3 col-md-12"> <label for="additional_information"
                                             class="form-label">Additional information<span
                                                 class="text-danger">*</span></label>
-                                        <textarea id="summernote2" name='additional_information' value="{{ $product->additional_information }}" class="form-control"
-                                            placeholder="Category name" id="additional_information" aria-describedby="additional_information">
+                                        <textarea id="summernote2" name='additional_information' value="{{ $product->additional_information }}"
+                                            class="form-control" placeholder="Category name" id="additional_information"
+                                            aria-describedby="additional_information">
+                                            {{ $product->additional_information }}
                                         </textarea>
                                         <div class="form-text" style="color:red">
                                             {{ $errors->first('additional_information') }}</div>
@@ -176,6 +188,7 @@
                                             class="form-label">Shipping returns<span class="text-danger">*</span></label>
                                         <textarea id="summernote3" name='shipping_returns' value="{{ $product->shipping_returns }}" class="form-control"
                                             placeholder="Category name" id="shipping_returns" aria-describedby="shipping_returns">
+                                            {{ $product->shipping_returns }}
                                         </textarea>
                                         <div class="form-text" style="color:red">
                                             {{ $errors->first('shipping_returns') }}</div>
@@ -184,8 +197,8 @@
 
                                 <div class="row">
                                     <div class="form-group">
-                                        <label for="status">pick category</label>
-                                        <select class="form-control" id="category_id" name="category_id">
+                                        <label for="status">Status</label>
+                                        <select class="form-control" name='status' id="category_id" name="category_id">
                                             <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Enabled
                                             </option>
                                             <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Disabled
@@ -208,81 +221,82 @@
 @endsection
 
 @section('script')
-
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
-
-
-<script>
-    $('#summernote').summernote({
-      placeholder: 'Hello stand alone ui',
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ]
-    });
-  </script>
-
-<script>
-    $('#summernote1').summernote({
-      placeholder: 'Hello stand alone ui',
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ]
-    });
-  </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 
 
-<script>
-    $('#summernote2').summernote({
-      placeholder: 'Hello stand alone ui',
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ]
-    });
-  </script>
+    <script>
+        $('#summernote').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
+
+    <script>
+        $('#summernote1').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
 
 
-<script>
-    $('#summernote3').summernote({
-      placeholder: 'Hello stand alone ui',
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ]
-    });
-  </script>
+    <script>
+        $('#summernote2').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
+
+
+    <script>
+        $('#summernote3').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
 
 
 

@@ -12,6 +12,7 @@ class Product extends Model
 
     protected $fillable = [
         'title',
+        'sku',
         'slug',
         'category_id',
         'sub_category_id',
@@ -29,7 +30,7 @@ class Product extends Model
 
     public function productColor()
     {
-        return $this->hasMany(ProductColor::class);
+        return $this->hasMany(ProductColor::class, 'product_id', 'id');
     }
 
     public function color()
